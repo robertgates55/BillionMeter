@@ -36,7 +36,7 @@ ROWS_PER_BALL = 2000000
 NUM_STEPS=45
 
 def update_display(string):
-    font = ImageFont.truetype(FredokaOne, 22)
+    font = ImageFont.truetype(FredokaOne, 26)
 
     img = Image.new("P", (inky_display.WIDTH, inky_display.HEIGHT))
     draw = ImageDraw.Draw(img)
