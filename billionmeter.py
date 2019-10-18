@@ -23,8 +23,8 @@ halfstep_seq = [
 ]
 
 
-main_gate_control_pins = [2,3,4,14]
-pre_gate_control_pins = [6,13,19,26]
+main_gate_control_pins = [6,13,19,26]
+pre_gate_control_pins = [2,3,4,14]
 extra_5v_pin = 21
 for pin in (main_gate_control_pins + pre_gate_control_pins + [extra_5v_pin]):
     GPIO.setup(pin, GPIO.OUT)
