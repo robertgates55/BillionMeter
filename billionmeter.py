@@ -48,7 +48,7 @@ def update_display(string):
 
     draw.text((x, y), message, inky_display.RED, font)
     inky_display.set_image(img)
-    #inky_display.show()
+    inky_display.show()
 
 
 def store_ball_count(count):
