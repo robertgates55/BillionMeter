@@ -79,7 +79,6 @@ def open_gate(control_pins):
     for i in range(NUM_STEPS):
         for halfstep in range(8):
             for pin in range(4):
-                print(str(control_pins[pin]))
                 GPIO.output(control_pins[pin], halfstep_seq[halfstep][pin])
             time.sleep(0.001)
     for pin in control_pins:
