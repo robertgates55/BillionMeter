@@ -36,7 +36,7 @@ ROWS_PER_BALL = 2000000
 NUM_STEPS=45
 
 def update_display(string):
-    font = ImageFont.truetype(FredokaOne, 26)
+    font = ImageFont.truetype(FredokaOne, 28)
 
     img = Image.open("resources/inkyphat.png")
     draw = ImageDraw.Draw(img)
@@ -44,7 +44,7 @@ def update_display(string):
     message = string
     w, h = font.getsize(message)
     x = (inky_display.WIDTH / 2) - (w / 2)
-    y = (inky_display.HEIGHT / 2) - (h / 2) + 30
+    y = (inky_display.HEIGHT / 2) - (h / 2) + 15
 
     draw.text((x, y), message, inky_display.RED, font)
     inky_display.set_image(img)
