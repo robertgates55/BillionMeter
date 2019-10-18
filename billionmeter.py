@@ -23,7 +23,7 @@ halfstep_seq = [
 
 
 main_gate_control_pins = [2,3,4,14]
-pre_gate_control_pins = [6,12,19,26]
+pre_gate_control_pins = [6,13,19,26]
 extra_5v_pin = 21
 for pin in (main_gate_control_pins + pre_gate_control_pins + [extra_5v_pin]):
     GPIO.setup(pin, GPIO.OUT)
@@ -47,7 +47,7 @@ def update_display(string):
 
     draw.text((x, y), message, inky_display.RED, font)
     inky_display.set_image(img)
-    inky_display.show()
+    #inky_display.show()
 
 
 def store_ball_count(count):
