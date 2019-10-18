@@ -100,10 +100,10 @@ def shut_gate(control_pins):
 
 def drop_ball():
     open_gate(main_gate_control_pins)
-    time.sleep(0.5)
+    time.sleep(1)
     shut_gate(main_gate_control_pins)
     open_gate(pre_gate_control_pins)
-    time.sleep(0.5)
+    time.sleep(1)
     shut_gate(pre_gate_control_pins)
 
 def drop_balls(num_balls, final_count):
