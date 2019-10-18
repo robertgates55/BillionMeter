@@ -24,9 +24,11 @@ halfstep_seq = [
 
 main_gate_control_pins = [2,3,4,14]
 pre_gate_control_pins = [6,12,19,26]
-for pin in (main_gate_control_pins + pre_gate_control_pins):
+extra_5v_pin = 21
+for pin in (main_gate_control_pins + pre_gate_control_pins + [extra_5v_pin]):
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, 0)
+GPIO.output(extra_5v_pin, 1)
 
 DATA_FILENAME = os.path.expanduser("~/balls_dropped.txt")
 ROWS_PER_BALL = 2000000
