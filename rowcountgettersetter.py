@@ -20,4 +20,5 @@ def get():
     with open(DATA_FILENAME, "r") as fd:
         return fd.readline().strip()
 
-serve(app, host='127.0.0.1', port=5000)
+print("starting up - 0.0.0.0:5000")
+serve(app, host='0.0.0.0', port=5000)
