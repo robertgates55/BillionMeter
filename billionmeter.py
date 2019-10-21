@@ -86,30 +86,32 @@ def new_hi_score():
     update_display("NEW HI-SCORE")
 
 
-def perform_steps(control_pins, num_steps, reverse=False):
-    sequence = halfstep_seq if not reverse else reversed(halfstep_seq)
-    control_pins = control_pins if not reverse else reversed(control_pins)
-    for i in range(num_steps):
-        for step in sequence:
-            for index, step_pin_value in enumerate(step):
-                GPIO.output(control_pins[index], step_pin_value)
+def open_gate(control_pins):
+    for i in range(NUM_STEPS):
+        for halfstep in range(8):
+            for pin in range(4):
+                GPIO.output(control_pins[pin], halfstep_seq[halfstep][pin])
             time.sleep(0.001)
     for pin in control_pins:
         GPIO.output(pin, 0)
 
-def open_gate(control_pins, num_steps):
-    perform_steps(control_pins, num_steps)
 
-def shut_gate(control_pins, num_steps):
-    perform_steps(control_pins, num_steps, True)
+def shut_gate(control_pins):
+    for i in range(NUM_STEPS):
+        for halfstep in reversed(range(8)):
+            for pin in reversed(range(4)):
+                GPIO.output(control_pins[pin], halfstep_seq[halfstep][pin])
+            time.sleep(0.001)
+    for pin in control_pins:
+        GPIO.output(pin, 0)
 
 def drop_ball():
-    open_gate(main_gate_control_pins, NUM_STEPS)
+    open_gate(main_gate_control_pins)
     time.sleep(1)
-    shut_gate(main_gate_control_pins, NUM_STEPS)
-    open_gate(pre_gate_control_pins, NUM_STEPS)
+    shut_gate(main_gate_control_pins)
+    open_gate(pre_gate_control_pins)
     time.sleep(1)
-    shut_gate(pre_gate_control_pins, NUM_STEPS)
+    shut_gate(pre_gate_control_pins)
 
 def drop_balls(num_balls, final_count):
     n = 0
