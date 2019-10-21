@@ -88,6 +88,7 @@ def new_hi_score():
 
 def perform_steps(control_pins, num_steps, reverse=False):
     sequence = halfstep_seq if not reverse else reversed(halfstep_seq)
+    control_pins = control_pins if not reverse else reversed(control_pins)
     for i in range(num_steps):
         for step in sequence:
             for index, step_pin_value in enumerate(step):
