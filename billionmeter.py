@@ -3,7 +3,6 @@ import time
 import RPi.GPIO as GPIO
 from inky import InkyPHAT
 from PIL import Image, ImageFont, ImageDraw
-from font_helvetica import Helvetica
 import urllib2
 import base64
 
@@ -37,7 +36,7 @@ ROWS_PER_BALL = 2000000
 NUM_STEPS=45
 
 def update_display(string):
-    font = ImageFont.truetype(Helvetica, 28)
+    font = ImageFont.truetype("Helvetica", 28)
 
     img = Image.open("resources/inkyphat.png")
     draw = ImageDraw.Draw(img)
