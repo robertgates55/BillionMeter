@@ -3,8 +3,9 @@ import time
 import RPi.GPIO as GPIO
 from inky import InkyPHAT
 from PIL import Image, ImageFont, ImageDraw
-from font_fredoka_one import FredokaOne
+from font_helvetica import Helvetica
 import urllib2
+import base64
 
 inky_display = InkyPHAT("red")
 inky_display.set_border(inky_display.WHITE)
@@ -36,7 +37,7 @@ ROWS_PER_BALL = 2000000
 NUM_STEPS=45
 
 def update_display(string):
-    font = ImageFont.truetype(FredokaOne, 28)
+    font = ImageFont.truetype(Helvetica, 28)
 
     img = Image.open("resources/inkyphat.png")
     draw = ImageDraw.Draw(img)
@@ -65,7 +66,12 @@ def get_current_ball_count():
 
 
 def get_latest_row_count():
-    count = int(urllib2.urlopen("https://pingpometer.common.duco.services/get").read())
+    request = urllib2.Request("https://pingpometer.common.duco.services/get")
+
+    base64string = base64.b64encode('%s:%s' % ('duco', os.environ['PINGPOMETER_PASSWORD']))
+    request.add_header("Authorization", "Basic %s" % base64string)
+
+    count = int(urllib2.urlopen(request).read())
     return count
 
 
@@ -79,32 +85,30 @@ def calculate_balls_to_drop(new_row_count):
 def new_hi_score():
     update_display("NEW HI-SCORE")
 
-def open_gate(control_pins):
-    for i in range(NUM_STEPS):
-        for halfstep in range(8):
-            for pin in range(4):
-                GPIO.output(control_pins[pin], halfstep_seq[halfstep][pin])
+
+def perform_steps(control_pins, num_steps, reverse=False):
+    sequence = halfstep_seq if not reverse else reversed(halfstep_seq)
+    for i in range(num_steps):
+        for step in sequence:
+            for index, step_pin_value in enumerate(step):
+                GPIO.output(control_pins[index], step_pin_value)
             time.sleep(0.001)
     for pin in control_pins:
         GPIO.output(pin, 0)
 
+def open_gate(control_pins, num_steps):
+    perform_steps(control_pins, num_steps)
 
-def shut_gate(control_pins):
-    for i in range(NUM_STEPS):
-        for halfstep in reversed(range(8)):
-            for pin in reversed(range(4)):
-                GPIO.output(control_pins[pin], halfstep_seq[halfstep][pin])
-            time.sleep(0.001)
-    for pin in control_pins:
-        GPIO.output(pin, 0)
+def shut_gate(control_pins, num_steps):
+    perform_steps(control_pins, num_steps, True)
 
 def drop_ball():
-    open_gate(main_gate_control_pins)
+    open_gate(main_gate_control_pins, NUM_STEPS)
     time.sleep(1)
-    shut_gate(main_gate_control_pins)
-    open_gate(pre_gate_control_pins)
+    shut_gate(main_gate_control_pins, NUM_STEPS)
+    open_gate(pre_gate_control_pins, NUM_STEPS)
     time.sleep(1)
-    shut_gate(pre_gate_control_pins)
+    shut_gate(pre_gate_control_pins, NUM_STEPS)
 
 def drop_balls(num_balls, final_count):
     n = 0
