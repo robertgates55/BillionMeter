@@ -81,7 +81,7 @@ def calculate_balls_to_drop(new_row_count):
 
 
 def new_hi_score():
-    update_display("NEW HI-SCORE")
+    update_display("new hi-score")
 
 
 def open_gate(control_pins):
