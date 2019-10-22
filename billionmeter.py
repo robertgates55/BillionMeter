@@ -128,7 +128,7 @@ num_balls = calculate_balls_to_drop(latest_row_count)
 if num_balls > 0:
     new_hi_score()
 else:
-    update_display("No increase")
+    update_display("no increase")
 
 # Drop them & update the final count
 drop_balls(num_balls, latest_row_count)
