@@ -36,7 +36,7 @@ ROWS_PER_BALL = 2000000
 NUM_STEPS=45
 
 def update_display(string):
-    font = ImageFont.truetype("resources/mario.ttf", 20)
+    font = ImageFont.truetype("resources/mario.ttf", 16)
     img = Image.open("resources/inkyphat.png")
     draw = ImageDraw.Draw(img)
 
