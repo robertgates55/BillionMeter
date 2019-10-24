@@ -45,12 +45,12 @@ def update_display(string):
     y = (inky_display.HEIGHT / 2) - (h / 2) - 20
     draw.text((x, y), message, inky_display.RED, font)
 
-    small_font = ImageFont.truetype("resources/Pixeled.ttf", 8)
-    last_updated = "Last update: "  # + datetime.datetime.now()
-    w, h = small_font.getsize(last_updated)
-    x = 2
-    y = inky_display.HEIGHT - h - 2
-    draw.text((x, y), last_updated, inky_display.BLACK, small_font)
+    # small_font = ImageFont.truetype("resources/Pixeled.ttf", 8)
+    # last_updated = "Last update: "  # + datetime.datetime.now()
+    # w, h = small_font.getsize(last_updated)
+    # x = 2
+    # y = inky_display.HEIGHT - h - 2
+    # draw.text((x, y), last_updated, inky_display.BLACK, small_font)
 
     inky_display.set_image(img)
     inky_display.show()
