@@ -119,9 +119,11 @@ def drop_balls(num_balls, final_count):
         n += 1
     update_display(str(final_count))
 
-print("Syncing")
+print("Syncing. Current ball count = " + str(get_current_ball_count()))
 # Get latest count
 latest_row_count = get_latest_row_count()
+
+print("Latest row count = " + str(latest_row_count))
 
 # How many balls
 num_balls = calculate_balls_to_drop(latest_row_count)
@@ -138,4 +140,4 @@ print("Dropping = " + str(num_balls))
 # Drop them & update the final count
 drop_balls(num_balls, latest_row_count)
 
-print("Dropped. Row count = " + str(latest_row_count))
+print("Dropped. New ball count = " + str(get_current_ball_count()))
