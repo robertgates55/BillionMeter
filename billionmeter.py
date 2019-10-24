@@ -77,7 +77,7 @@ def calculate_balls_to_drop(new_row_count):
     difference = round((new_row_count / ROWS_PER_BALL) - get_current_ball_count())
     if difference < 0:
         difference = 0
-    return difference
+    return int(difference)
 
 
 def new_hi_score():
@@ -119,16 +119,23 @@ def drop_balls(num_balls, final_count):
         n += 1
     update_display(str(final_count))
 
+print("Syncing")
 # Get latest count
 latest_row_count = get_latest_row_count()
 
 # How many balls
 num_balls = calculate_balls_to_drop(latest_row_count)
 
+print("Balls to drop = " + str(num_balls))
+
 if num_balls > 0:
     new_hi_score()
 else:
     update_display("no increase")
 
+print("Dropping = " + str(num_balls))
+
 # Drop them & update the final count
 drop_balls(num_balls, latest_row_count)
+
+print("Dropped")
