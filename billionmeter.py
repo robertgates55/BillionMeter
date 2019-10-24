@@ -36,7 +36,7 @@ ROWS_PER_BALL = 2000000
 NUM_STEPS=45
 
 def update_display(string):
-    font = ImageFont.truetype("resources/Minecraft.ttf", 20)
+    font = ImageFont.truetype("resources/Pixeled.ttf", 30)
     img = Image.open("resources/inkyphat.png")
     draw = ImageDraw.Draw(img)
 
@@ -48,9 +48,9 @@ def update_display(string):
 
     inky_display.set_image(img)
 
-    small_font = ImageFont.truetype("resources/Minecraft.ttf", 10)
+    small_font = ImageFont.truetype("resources/Pixeled.ttf", 10)
     last_updated = "Last updated: 12/12/12 13:23"
-    w, h = font.getsize(last_updated)
+    w, h = small_font.getsize(last_updated)
     x = 5
     y = inky_display.HEIGHT - h - 5
     draw.text((x, y), last_updated, inky_display.BLACK, small_font)
