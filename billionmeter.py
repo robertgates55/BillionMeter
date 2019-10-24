@@ -34,19 +34,19 @@ DATA_FILENAME = os.path.expanduser("~/balls_dropped.txt")
 ROWS_PER_BALL = 2000000
 NUM_STEPS=45
 
-def update_display(string, font_size=22):
-    font = ImageFont.truetype("resources/Pixeled.ttf", font_size)
+def update_display(string):
+    font = ImageFont.truetype("resources/Pixeled.ttf", 22)
     img = Image.open("resources/inkyphat.png")
     draw = ImageDraw.Draw(img)
 
     message = string
     w, h = font.getsize(message)
     x = (inky_display.WIDTH / 2) - (w / 2)
-    y = (inky_display.HEIGHT / 2) - (h / 2) - 10
+    y = (inky_display.HEIGHT / 2) - (h / 2) - 20
     draw.text((x, y), message, inky_display.RED, font)
 
     small_font = ImageFont.truetype("resources/Pixeled.ttf", 8)
-    last_updated = "Last update: " + datetime.datetime.now()
+    last_updated = "Last update: "  # + datetime.datetime.now()
     w, h = small_font.getsize(last_updated)
     x = 2
     y = inky_display.HEIGHT - h - 2
@@ -87,7 +87,7 @@ def calculate_balls_to_drop(new_row_count):
 
 
 def new_hi_score():
-    update_display("NEW HI-SCORE", 16)
+    update_display("new hi-score")
 
 
 def open_gate(control_pins):
@@ -139,7 +139,7 @@ print("Balls to drop = " + str(num_balls))
 if num_balls > 0:
     new_hi_score()
 else:
-    update_display("NO INCREASE", 16)
+    update_display("no increase")
 
 print("Dropping = " + str(num_balls))
 
