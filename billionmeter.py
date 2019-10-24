@@ -5,6 +5,7 @@ from inky import InkyPHAT
 from PIL import Image, ImageFont, ImageDraw
 import urllib2
 import base64
+import datetime
 
 inky_display = InkyPHAT("red")
 inky_display.set_border(inky_display.WHITE)
@@ -36,21 +37,21 @@ ROWS_PER_BALL = 2000000
 NUM_STEPS=45
 
 def update_display(string):
-    font = ImageFont.truetype("resources/Pixeled.ttf", 25)
+    font = ImageFont.truetype("resources/Pixeled.ttf", 22)
     img = Image.open("resources/inkyphat.png")
     draw = ImageDraw.Draw(img)
 
     message = string
     w, h = font.getsize(message)
     x = (inky_display.WIDTH / 2) - (w / 2)
-    y = (inky_display.HEIGHT / 2) - (h / 2)
+    y = (inky_display.HEIGHT / 2) - (h / 2) - 20
     draw.text((x, y), message, inky_display.RED, font)
 
-    small_font = ImageFont.truetype("resources/Pixeled.ttf", 10)
-    last_updated = "Last updated: 12/12/12 13:23"
+    small_font = ImageFont.truetype("resources/Pixeled.ttf", 8)
+    last_updated = "Last update: " + datetime.datetime.now()
     w, h = small_font.getsize(last_updated)
-    x = 5
-    y = inky_display.HEIGHT - h - 5
+    x = 2
+    y = inky_display.HEIGHT - h - 2
     draw.text((x, y), last_updated, inky_display.BLACK, small_font)
 
     inky_display.set_image(img)
