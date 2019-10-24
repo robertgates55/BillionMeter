@@ -138,4 +138,4 @@ print("Dropping = " + str(num_balls))
 # Drop them & update the final count
 drop_balls(num_balls, latest_row_count)
 
-print("Dropped")
+print("Dropped. Row count = " + str(latest_row_count))
