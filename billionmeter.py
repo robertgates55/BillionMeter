@@ -87,7 +87,7 @@ def calculate_balls_to_drop(new_row_count):
 
 
 def new_hi_score():
-    update_display("new hi-score")
+    update_display("HI-SCORE")
 
 
 def open_gate(control_pins):
@@ -139,7 +139,7 @@ print("Balls to drop = " + str(num_balls))
 if num_balls > 0:
     new_hi_score()
 else:
-    update_display("no increase")
+    update_display("NO CHANGE")
 
 print("Dropping = " + str(num_balls))
 
