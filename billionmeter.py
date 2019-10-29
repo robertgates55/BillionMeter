@@ -116,7 +116,7 @@ def drop_balls(num_balls, final_count):
         drop_ball()
         store_ball_count(get_current_ball_count() + 1)
         n += 1
-    update_display(str(final_count))
+    update_display('{:,}'.format(final_count))
 
 print("Syncing. Current ball count = " + str(get_current_ball_count()))
 # Get latest count
