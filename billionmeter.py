@@ -23,9 +23,27 @@ halfstep_seq = [
     [1,0,0,1]
 ]
 
-
 main_gate_control_pins = [6,13,19,26]
 pre_gate_control_pins = [2,3,4,14]
+BUTTON_POWER_PIN=20
+BUTTON_INPUT_PIN=21
+REFILL_FILENAME = os.path.expanduser("~/needs_refill.txt")
+
+GPIO.setup(BUTTON_POWER_PIN, GPIO.OUT)
+GPIO.output(BUTTON_POWER_PIN, 1)
+GPIO.setup(BUTTON_INPUT_PIN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+def button_pressed_callback(channel):
+    """
+    Triggers when the button is pressed. Deletes the data file if one exists.
+    Button should be connected to 3.3v on one side and to BUTTON_INPUT_PIN on
+    the other side.
+    """
+    if os.path.exists(REFILL_FILENAME):
+        os.remove(REFILL_FILENAME)
+
+GPIO.add_event_detect(BUTTON_INPUT_PIN, GPIO.RISING, callback=button_pressed_callback, bouncetime=300)
+
 for pin in (main_gate_control_pins + pre_gate_control_pins):
     GPIO.setup(pin, GPIO.OUT)
     GPIO.output(pin, 0)
@@ -112,11 +130,25 @@ def drop_ball():
 
 def drop_balls(num_balls, final_count):
     n = 0
+    balls_dropped = 0
     while n < num_balls:
+        if balls_dropped >= 10:
+            with open(REFILL_FILENAME, "w") as fd:
+                fd.write("refill me!")
+            update_display('REFILL ME')
+
+        # Sleep until the button is pressed
+        while os.path.exists(REFILL_FILENAME):
+            sleep(1)
+            balls_dropped = 0
+
         drop_ball()
         store_ball_count(get_current_ball_count() + 1)
         n += 1
+        balls_dropped += 1
+
     update_display('{:,}'.format(final_count))
+
 
 print("Syncing. Current ball count = " + str(get_current_ball_count()))
 # Get latest count
