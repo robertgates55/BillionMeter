@@ -1,0 +1,1 @@
+* * * * * export PINGPOMETER_PASSWORD="asd" && cd /home/pi/BillionMeter && git pull && /usr/bin/flock -n /tmp/my.lockfile -c "/usr/bin/python /home/pi/BillionMeter/billionmeter.py >> /home/pi/log.log 2>&1"
