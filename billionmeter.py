@@ -7,6 +7,7 @@ import urllib2
 import base64
 import datetime
 
+inky_display = InkyPHAT("red")
 BALLS_DROPPED_FILENAME = os.path.expanduser("~/balls_dropped.txt")
 HOPPER_CONTENTS_FILENAME = os.path.expanduser("~/hopper_contents.txt")
 ROWS_PER_BALL = 2000000
@@ -36,7 +37,6 @@ def button_pressed_callback(channel):
     store_count(HOPPER_CONTENTS_FILENAME, 10)
 
 def setup():
-    inky_display = InkyPHAT("red")
     inky_display.set_border(inky_display.WHITE)
 
     GPIO.setmode(GPIO.BCM)
