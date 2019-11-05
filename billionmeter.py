@@ -77,10 +77,11 @@ def override_ball_count(pingpometer_id):
 
     base64string = base64.b64encode('%s:%s' % ('duco', os.environ['PINGPOMETER_PASSWORD']))
     request.add_header("Authorization", "Basic %s" % base64string)
-    response = urllib2.urlopen(request)
-
-    if not response.getcode() > 200:
+    try:
+        response = urllib2.urlopen(request)
         store_count(BALLS_DROPPED_FILENAME, response.read())
+    except:
+        print("Nothing to do")
 
 def store_count(filename, count):
     with open(filename, "w") as fd:
