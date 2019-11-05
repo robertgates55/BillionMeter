@@ -98,8 +98,8 @@ def new_hi_score():
     update_display("HI-SCORE")
 
 
-def open_gate(control_pins):
-    for i in range(NUM_STEPS):
+def open_gate(control_pins, num_steps=NUM_STEPS):
+    for i in range(num_steps):
         for halfstep in range(8):
             for pin in range(4):
                 GPIO.output(control_pins[pin], HALFSTEP_SEQ[halfstep][pin])
@@ -108,8 +108,8 @@ def open_gate(control_pins):
         GPIO.output(pin, 0)
 
 
-def shut_gate(control_pins):
-    for i in range(NUM_STEPS):
+def shut_gate(control_pins, num_steps=NUM_STEPS):
+    for i in range(num_steps):
         for halfstep in reversed(range(8)):
             for pin in reversed(range(4)):
                 GPIO.output(control_pins[pin], HALFSTEP_SEQ[halfstep][pin])
