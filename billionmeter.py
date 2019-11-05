@@ -63,6 +63,24 @@ def update_display(string):
     inky_display.set_image(img)
     inky_display.show()
 
+def getMAC(interface='wlan0'):
+    # Return the MAC address of the specified interface
+    try:
+        str = open('/sys/class/net/%s/address' %interface).read()
+    except:
+        str = "00:00:00:00:00:00"
+    return str[0:17]
+
+
+def override_ball_count(pingpometer_id):
+    request = urllib2.Request(print("https://pingpometer.common.duco.services/%s/get" % pingpometer_id))
+
+    base64string = base64.b64encode('%s:%s' % ('duco', os.environ['PINGPOMETER_PASSWORD']))
+    request.add_header("Authorization", "Basic %s" % base64string)
+    response = urllib2.urlopen(request)
+
+    if not response.getcode() > 200:
+        store_count(BALLS_DROPPED_FILENAME, response.read())
 
 def store_count(filename, count):
     with open(filename, "w") as fd:
@@ -147,10 +165,10 @@ setup()
 print("Syncing. Current ball count = " + str(get_current_count(BALLS_DROPPED_FILENAME)))
 # Get latest count
 latest_row_count = get_latest_row_count()
-
 print("Latest row count = " + str(latest_row_count))
 
 # How many balls
+override_ball_count(getMAC().replace(':', ''))
 num_balls = calculate_balls_to_drop(latest_row_count)
 
 print("Balls to drop = " + str(num_balls))
