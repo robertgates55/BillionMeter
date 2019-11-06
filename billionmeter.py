@@ -139,8 +139,9 @@ def shut_gate(control_pins, num_steps=NUM_STEPS):
 def drop_ball():
     open_gate(MAIN_GATE_CONTROL_PINS)
     time.sleep(0.2)
-    open_gate(PRE_GATE_CONTROL_PINS, 10)
-    shut_gate(PRE_GATE_CONTROL_PINS, 10)
+    open_gate(PRE_GATE_CONTROL_PINS, 20)
+    time.sleep(0.2)
+    shut_gate(PRE_GATE_CONTROL_PINS, 20)
     time.sleep(0.2)
     shut_gate(MAIN_GATE_CONTROL_PINS)
 
