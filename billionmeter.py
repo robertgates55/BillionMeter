@@ -138,11 +138,16 @@ def shut_gate(control_pins, num_steps=NUM_STEPS):
 
 def drop_ball():
     open_gate(MAIN_GATE_CONTROL_PINS)
-    time.sleep(1)
+    time.sleep(0.2)
+    open_gate(PRE_GATE_CONTROL_PINS, 10)
+    shut_gate(PRE_GATE_CONTROL_PINS, 10)
+    time.sleep(0.2)
     shut_gate(MAIN_GATE_CONTROL_PINS)
+
     open_gate(PRE_GATE_CONTROL_PINS)
     time.sleep(1)
     shut_gate(PRE_GATE_CONTROL_PINS)
+
 
 def drop_balls(num_balls, final_count):
     n = 0
@@ -150,9 +155,13 @@ def drop_balls(num_balls, final_count):
         if get_current_count(HOPPER_CONTENTS_FILENAME) == 0:
             update_display('REFILL ME')
 
-        # Sleep until the button is pressed
-        while get_current_count(HOPPER_CONTENTS_FILENAME) == 0:
+        # Sleep until the button is pressed - max 10 minutes
+        t = 0
+        while get_current_count(HOPPER_CONTENTS_FILENAME) == 0 and t < 600:
             time.sleep(1)
+            t += 1
+        if t == 600:
+            exit()
 
         drop_ball()
         store_count(BALLS_DROPPED_FILENAME, get_current_count(BALLS_DROPPED_FILENAME) + 1)
@@ -176,8 +185,6 @@ print("Balls to drop = " + str(num_balls))
 
 if num_balls > 0:
     new_hi_score()
-else:
-    update_display("NO CHANGE")
 
 print("Dropping = " + str(num_balls))
 
