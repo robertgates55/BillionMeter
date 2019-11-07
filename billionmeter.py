@@ -169,7 +169,7 @@ def drop_balls(num_balls, final_count):
         store_count(HOPPER_CONTENTS_FILENAME, get_current_count(HOPPER_CONTENTS_FILENAME) - 1)
         n += 1
 
-    update_display(round(final_count/1000000,0) + "M")
+    update_display(str(int(round(final_count/1000000))) + "M")
 
 setup()
 
