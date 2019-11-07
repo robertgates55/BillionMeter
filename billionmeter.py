@@ -50,13 +50,13 @@ def setup():
         GPIO.output(pin, 0)
 
 def update_display(string):
-    font = ImageFont.truetype("resources/Minecraft.ttf", 50)
+    font = ImageFont.truetype("resources/Minecraft.ttf", 70)
     img = Image.open("resources/inkyphat.png")
     draw = ImageDraw.Draw(img)
 
     message = string
     w, h = font.getsize(message)
-    x = (inky_display.WIDTH / 2) - (w / 2)
+    x = (inky_display.WIDTH / 2) - w - 5
     y = (inky_display.HEIGHT / 2) - (h / 2)
     draw.text((x, y), message, inky_display.RED, font)
 
