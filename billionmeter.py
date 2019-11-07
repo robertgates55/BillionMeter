@@ -56,7 +56,7 @@ def update_display(string):
 
     message = string
     w, h = font.getsize(message)
-    x = (inky_display.WIDTH / 2) - w - 5
+    x = 60  # (inky_display.WIDTH / 2) - w - 5
     y = (inky_display.HEIGHT / 2) - (h / 2)
     draw.text((x, y), message, inky_display.RED, font)
 
