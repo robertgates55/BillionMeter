@@ -50,14 +50,14 @@ def setup():
         GPIO.output(pin, 0)
 
 def update_display(string):
-    font = ImageFont.truetype("resources/Minecraft.ttf", 70)
+    font = ImageFont.truetype("resources/Minecraft.ttf", 85)
     img = Image.open("resources/inkyphat.png")
     draw = ImageDraw.Draw(img)
 
     message = string
     w, h = font.getsize(message)
-    x = 60  # (inky_display.WIDTH / 2) - w - 5
-    y = (inky_display.HEIGHT / 2) - (h / 2)
+    x = 65  # (inky_display.WIDTH / 2) - w - 5
+    y = (inky_display.HEIGHT / 2) - (h / 2) - 15
     draw.text((x, y), message, inky_display.RED, font)
 
     inky_display.set_image(img)
@@ -169,7 +169,7 @@ def drop_balls(num_balls, final_count):
         store_count(HOPPER_CONTENTS_FILENAME, get_current_count(HOPPER_CONTENTS_FILENAME) - 1)
         n += 1
 
-    update_display(str(int(round(final_count/1000000))) + "M")
+    update_display(str(int(round(final_count/1000000))))
 
 setup()
 
