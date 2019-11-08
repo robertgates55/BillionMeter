@@ -63,6 +63,22 @@ def update_display(string):
     inky_display.set_image(img)
     inky_display.show()
 
+def clean_display():
+    cycles = 3
+    colours = (inky_display.RED, inky_display.BLACK, inky_display.WHITE)
+
+    for i in range(cycles):
+        print("Cleaning cycle")
+        for j, c in enumerate(colours):
+            inky_display.set_border(c)
+            for x in range(inky_display.WIDTH):
+                for y in range(inky_display.HEIGHT):
+                    inky_display.putpixel((x, y), c)
+            inky_display.show()
+            time.sleep(1)
+
+
+print("Cleaning complete!")
 def getMAC(interface='wlan0'):
     # Return the MAC address of the specified interface
     try:
@@ -173,6 +189,8 @@ def drop_balls(num_balls, final_count):
 
 setup()
 
+clean_display()
+
 print("Syncing. Current ball count = " + str(get_current_count(BALLS_DROPPED_FILENAME)))
 # Get latest count
 latest_row_count = get_latest_row_count()
@@ -193,27 +211,3 @@ print("Dropping = " + str(num_balls))
 drop_balls(num_balls, latest_row_count)
 
 print("Dropped. New ball count = " + str(get_current_count(BALLS_DROPPED_FILENAME)))
-
-
-
-
-
-
-import time
-import sys
-
-cycles = 3
-colours = (inky_display.RED, inky_display.BLACK, inky_display.WHITE)
-
-for i in range(cycles):
-    print("Cleaning cycle %i\n" % (i + 1))
-    for j, c in enumerate(colours):
-        inky_display.set_border(c)
-        for x in range(inky_display.WIDTH):
-            for y in range(inky_display.HEIGHT):
-                inky_display.putpixel((x, y), c)
-        inky_display.show()
-        time.sleep(1)
-    print("\n")
-
-print("Cleaning complete!")
