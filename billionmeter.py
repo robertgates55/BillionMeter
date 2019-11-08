@@ -63,6 +63,7 @@ def update_display(string):
     inky_display.set_image(img)
     inky_display.show()
 
+
 def clean_display():
     cycles = 3
     colours = (inky_display.RED, inky_display.BLACK, inky_display.WHITE)
@@ -76,9 +77,9 @@ def clean_display():
                     inky_display.putpixel((x, y), c)
             inky_display.show()
             time.sleep(1)
+    print("Cleaning complete!")
 
 
-print("Cleaning complete!")
 def getMAC(interface='wlan0'):
     # Return the MAC address of the specified interface
     try:
