@@ -192,7 +192,7 @@ def drop_balls(num_balls, final_count):
 
 setup()
 
-clean_display()
+# clean_display()
 
 print("Syncing. Current ball count = " + str(get_current_count(BALLS_DROPPED_FILENAME)))
 # Get latest count
