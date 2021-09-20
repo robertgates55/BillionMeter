@@ -92,7 +92,7 @@ def getMAC(interface='wlan0'):
 
 
 def override_ball_count(pingpometer_id):
-    request = urllib2.Request("https://pingpometer.common.duco.services/%s/get" % pingpometer_id)
+    request = urllib2.Request("https://pingpometer.qa.duco.services/%s/get" % pingpometer_id)
 
     base64string = base64.b64encode('%s:%s' % ('duco', os.environ['PINGPOMETER_PASSWORD']))
     request.add_header("Authorization", "Basic %s" % base64string)
@@ -116,7 +116,7 @@ def get_current_count(filename):
 
 
 def get_latest_row_count():
-    request = urllib2.Request("https://pingpometer.common.duco.services/get")
+    request = urllib2.Request("https://pingpometer.qa.duco.services/get")
 
     base64string = base64.b64encode('%s:%s' % ('duco', os.environ['PINGPOMETER_PASSWORD']))
     request.add_header("Authorization", "Basic %s" % base64string)
